@@ -1,118 +1,120 @@
-:root {
-    --primary: #ff7b9c;
-    --bg-color: #fce4ec;
-    --envelope-color: #f06292;
-    --paper-color: #ffffff;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
+    background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    background-color: var(--bg-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
 }
 
-.container {
-    cursor: pointer;
+.wrapper {
+    perspective: 1000px;
 }
 
-.envelope-wrapper {
+.card-container {
+    width: 320px;
+    height: 450px;
     position: relative;
-    background-color: var(--envelope-color);
-    width: 300px;
-    height: 200px;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
 }
 
-/* The flap of the envelope */
-.envelope-wrapper::before {
-    content: "";
+/* The Flip Logic */
+.is-open {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-inside {
     position: absolute;
-    top: 0;
-    z-index: 2;
-    border-top: 130px solid var(--primary);
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    transform-origin: top;
-    transition: all 0.5s ease-in-out;
-}
-
-.envelope {
-    position: relative;
     width: 100%;
     height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
 }
 
-/* The white letter inside */
-.letter {
-    position: absolute;
-    right: 10%;
-    bottom: 0;
-    width: 80%;
-    height: 85%;
-    background: var(--paper-color);
-    text-align: left;
-    padding: 20px;
-    box-sizing: border-box;
-    transition: all 0.5s ease-in-out;
-    z-index: 1;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+/* Front Design (Modern/Minimalist) */
+.card-front {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.text {
-    font-size: 14px;
+.ornament {
+    font-size: 50px;
+    color: #d4a373;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #5d4037;
+    margin-bottom: 10px;
+}
+
+.open-btn {
+    margin-top: 30px;
+    padding: 10px 25px;
+    background: #5d4037;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.open-btn:hover {
+    background: #8d6e63;
+    transform: translateY(-2px);
+}
+
+/* Inside Design (The Letter) */
+.card-inside {
+    background: #fff;
+    transform: rotateY(180deg);
+}
+
+h2 {
+    font-family: 'Dancing Script', cursive;
+    color: #d81b60;
+    margin-bottom: 20px;
+}
+
+.message-content {
+    font-size: 0.95rem;
+    line-height: 1.8;
     color: #444;
-    line-height: 1.6;
 }
 
-.signature {
-    margin-top: 15px;
+.sig {
+    margin-top: 20px;
     font-weight: bold;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
 }
 
-/* The Heart Button */
-.heart {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 30px;
-    height: 30px;
-    background: #d81b60;
-    z-index: 4;
-    transform: translate(-50%, -20%) rotate(45deg);
-    transition: transform 0.5s ease-in-out;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+.close-btn {
+    margin-top: auto;
+    background: none;
+    border: none;
+    color: #999;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.8rem;
 }
 
-.heart:before, .heart:after {
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: #d81b60;
-    border-radius: 50%;
-}
-
-.heart:before { top: -15px; left: 0; }
-.heart:after { left: -15px; top: 0; }
-
-/* Animation Trigger */
-.flap.envelope-wrapper::before {
-    transform: rotateX(180deg);
-    z-index: 0;
-}
-
-.flap .letter {
-    bottom: 100px;
-    z-index: 3;
-}
-
-.flap .heart {
-    transform: translate(-50%, -20%) rotate(45deg) scale(0.8);
-    opacity: 0.5;
-  }
