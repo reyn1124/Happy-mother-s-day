@@ -3,31 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Mother's Day!</title>
+    <title>For Mom</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <div class="envelope-wrapper">
-            <div class="envelope">
-                <div class="letter">
-                    <div class="text">
-                        <strong>Para sa Pinakamahalagang Babae,</strong>
-                        <p>Happy Mother's Day! Salamat sa lahat ng pag-aalaga, pagmamahal, at suporta. You are the heart of our home.</p>
-                        <p class="signature">Nagmamahal, <br> Rain</p>
-                    </div>
-                </div>
+    <div class="wrapper">
+        <!-- The Card Container -->
+        <div class="card-container" id="card">
+            
+            <!-- Front of the card (The "Open Me" part) -->
+            <div class="card-front">
+                <div class="ornament">✿</div>
+                <h1>Para kay Mama</h1>
+                <p>May special message ako sa loob...</p>
+                <button class="open-btn">Click to Open</button>
             </div>
-            <div class="heart"></div>
+
+            <!-- Back/Inside of the card (The message) -->
+            <div class="card-inside">
+                <h2>Happy Mother's Day!</h2>
+                <div class="message-content">
+                    <p>Ma, thank you sa lahat ng sakripisyo at pagmamahal. You're the best! Hope you like this simple surprise.</p>
+                    <p class="sig">Love, <br> Rain</p>
+                </div>
+                <button class="close-btn">Close</button>
+            </div>
+            
         </div>
     </div>
 
     <script>
-        const envelope = document.querySelector('.envelope-wrapper');
-        envelope.addEventListener('click', () => {
-            envelope.classList.toggle('flap');
+        const card = document.getElementById('card');
+        const openBtn = document.querySelector('.open-btn');
+        const closeBtn = document.querySelector('.close-btn');
+
+        openBtn.addEventListener('click', () => {
+            card.classList.add('is-open');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            card.classList.remove('is-open');
         });
     </script>
 </body>
 </html>
+
